@@ -1,13 +1,13 @@
 import{readFileSync as R,readdirSync as L,mkdirSync as K,writeFileSync as W}from'node:fs';
 import{join as J}from'node:path';
-const I=process.env.MAKEFUN_INPUT_DIR??'/input',O=process.env.MAKEFUN_OUTPUT_DIR??'/output',E=new TextEncoder;
+const I=process.env.MAKEFUN_INPUT_DIR??'/input',O=process.env.MAKEFUN_OUTPUT_DIR??'/output',E=new TextEncoder,V=new Set([0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33,34,48,49,50,51,52,64,65,80,81,82,83]);
 function run(p:Uint8Array,q:Uint8Array){
  let d=new Int32Array(256),c=new Uint16Array(64),m=new Int32Array(256),z=new Uint8Array(65536),s=0,cs=0,pc=0,ip=0,n=0,l=0,x=0;
  const end=(e:number)=>[z.subarray(0,l),e]as const;
  for(;;){
   if(n++==1e6)return end(10);if(pc<0||pc>=p.length)return end(9);let o=p[pc++],a=0,b=0,r=0;
   let im=o==1?1:o==2?4:o>=48&&o<=51?2:0;
-  if(!([0,1,2,3,4,5,6,7,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33,34,48,49,50,51,52,64,65,80,81,82,83].includes(o)))return end(5);
+  if(!V.has(o))return end(5);
   if(pc+im>p.length)return end(9);
   let pop=o==3||o==4||o==23||o==27||o==49||o==50||o==64||o==80||o==81||o==83?1:o==5||o==6||o==65||(o>=16&&o<=34&&o!=23&&o!=27)?2:o==7?3:0;
   let push=o==1||o==2||o==4||o==82?1:o==6?1:0;if(o==4)push=2;if(o==6)push=3;if(o==7)push=3;if(o>=16&&o<=34)push=1;
